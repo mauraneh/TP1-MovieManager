@@ -1,5 +1,3 @@
-import Foundation
-
 @main
 struct TP1_MovieManager {
     static func main() {
@@ -24,8 +22,8 @@ struct TP1_MovieManager {
 typealias Movie = (title: String, year: Int, rating: Double, genre: String)
 
 func displayMovie(_ movie: Movie) {
-    print("📽️  \(movie.title) (\(movie.year)) - \(movie.genre)")
-    print("⭐ Rating: \(String(format: "%.1f", movie.rating))/10")
+    print("- \(movie.title) (\(movie.year)) - \(movie.genre)")
+    print("  Note: \(movie.rating)/10")
 }
 
 func addMovie(title: String, year: Int, rating: Double, genre: String, to movies: inout [Movie]) {
@@ -65,13 +63,13 @@ func moviesByDecade(_ movies: [Movie]) -> [String: [Movie]] {
 }
 
 func displayMenu() {
-    print("\n=== 🎬 Movie Manager by mau 👧 ===")
+    print("\n=== Movie Manager (sans spoilers) ===")
     print("1. Afficher tous les films")
     print("2. Rechercher un film")
     print("3. Filtrer par genre")
     print("4. Afficher les statistiques")
     print("5. Ajouter un film")
-    print("6. Bye bye")
+    print("6. Quitter")
 }
 
 func runApp(movies: inout [Movie]) {
@@ -85,7 +83,7 @@ func runApp(movies: inout [Movie]) {
         switch choice {
         case "1":
             if movies.isEmpty {
-                print("Aucun film disponible.")
+                print("Aucun film disponible. Meme pas un court-metrage.")
             } else {
                 movies.forEach { displayMovie($0) }
             }
@@ -96,7 +94,7 @@ func runApp(movies: inout [Movie]) {
             if let movie = findMovie(byTitle: title, in: movies) {
                 displayMovie(movie)
             } else {
-                print("oh oh film non trouve.")
+                print("Film non trouve. Peut-etre un film imaginaire ?")
             }
 
         case "3":
@@ -110,14 +108,15 @@ func runApp(movies: inout [Movie]) {
             let inputGenre = readLine() ?? ""
             let filtered = filterMovies(movies) { $0.genre.lowercased() == inputGenre.lowercased() }
             if filtered.isEmpty {
-                print("Aucun film pour ce genre.")
+                print("Aucun film pour ce genre. On va dire que c'est un genre rare.")
             } else {
                 filtered.forEach { displayMovie($0) }
             }
 
         case "4":
             print("Nombre total de films: \(movies.count)")
-            print("Note moyenne: \(String(format: "%.2f", averageRating(of: movies)))/10")
+            let avg = averageRating(of: movies)
+            print("Note moyenne: \(avg)/10")
             if let top = bestMovie(in: movies) {
                 print("Meilleur film:")
                 displayMovie(top)
@@ -149,14 +148,14 @@ func runApp(movies: inout [Movie]) {
             let genre = readLine() ?? ""
 
             addMovie(title: title, year: year, rating: rating, genre: genre, to: &movies)
-            print("Film ajoute.")
+            print("Film ajoute. Pas de popcorn inclus.")
 
         case "6":
             shouldRun = false
-            print("Adios Amigos !")
+            print("Au revoir ! Fin du generique.")
 
         default:
-            print("C'est pqs un bon choix ça ❌")
+            print("Choix invalide. Essaie encore, personne ne juge.")
         }
     }
 }
