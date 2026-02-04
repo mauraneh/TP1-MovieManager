@@ -65,13 +65,13 @@ func moviesByDecade(_ movies: [Movie]) -> [String: [Movie]] {
 }
 
 func displayMenu() {
-    print("\n=== 🎬 Movie Manager ===")
+    print("\n=== 🎬 Movie Manager by mau 👧 ===")
     print("1. Afficher tous les films")
     print("2. Rechercher un film")
     print("3. Filtrer par genre")
     print("4. Afficher les statistiques")
     print("5. Ajouter un film")
-    print("6. Quitter")
+    print("6. Bye bye")
 }
 
 func runApp(movies: inout [Movie]) {
@@ -96,7 +96,7 @@ func runApp(movies: inout [Movie]) {
             if let movie = findMovie(byTitle: title, in: movies) {
                 displayMovie(movie)
             } else {
-                print("Film non trouve.")
+                print("oh oh film non trouve.")
             }
 
         case "3":
@@ -153,10 +153,10 @@ func runApp(movies: inout [Movie]) {
 
         case "6":
             shouldRun = false
-            print("Au revoir !")
+            print("Adios Amigos !")
 
         default:
-            print("Choix invalide.")
+            print("C'est pqs un bon choix ça ❌")
         }
     }
 }
