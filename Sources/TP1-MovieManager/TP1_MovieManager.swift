@@ -2,16 +2,16 @@
 struct TP1_MovieManager {
     static func main() {
         var movies: [(title: String, year: Int, rating: Double, genre: String)] = [
-            (title: "Inception", year: 2010, rating: 8.8, genre: "Sci-Fi"),
+            (title: "Harry Potter and the Sorcerer's Stone", year: 2001, rating: 7.6, genre: "Fantasy"),
+            (title: "The Lord of the Rings: The Fellowship of the Ring", year: 2001, rating: 8.8, genre: "Fantasy"),
+            (title: "Titanic", year: 1997, rating: 7.9, genre: "Romance"),
+            (title: "The Notebook", year: 2004, rating: 7.8, genre: "Romance"),
             (title: "The Dark Knight", year: 2008, rating: 9.0, genre: "Action"),
             (title: "Interstellar", year: 2014, rating: 8.6, genre: "Sci-Fi"),
-            (title: "Parasite", year: 2019, rating: 8.6, genre: "Drama"),
-            (title: "The Grand Budapest Hotel", year: 2014, rating: 8.1, genre: "Comedy"),
             (title: "Get Out", year: 2017, rating: 7.7, genre: "Horror"),
+            (title: "The Grand Budapest Hotel", year: 2014, rating: 8.1, genre: "Comedy"),
             (title: "Whiplash", year: 2014, rating: 8.5, genre: "Drama"),
-            (title: "The Matrix", year: 1999, rating: 8.7, genre: "Sci-Fi"),
             (title: "Toy Story", year: 1995, rating: 8.3, genre: "Animation"),
-            (title: "Mad Max: Fury Road", year: 2015, rating: 8.1, genre: "Action"),
             (title: "The Godfather", year: 1972, rating: 9.2, genre: "Crime")
         ]
 
