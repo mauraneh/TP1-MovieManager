@@ -19,42 +19,56 @@ struct TP1_MovieManager {
     }
 }
 
-typealias Movie = (title: String, year: Int, rating: Double, genre: String)
-
-func displayMovie(_ movie: Movie) {
+func displayMovie(_ movie: (title: String, year: Int, rating: Double, genre: String)) {
     print("- \(movie.title) (\(movie.year)) - \(movie.genre)")
     print("  Note: \(movie.rating)/10")
 }
 
-func addMovie(title: String, year: Int, rating: Double, genre: String, to movies: inout [Movie]) {
+func addMovie(
+    title: String,
+    year: Int,
+    rating: Double,
+    genre: String,
+    to movies: inout [(title: String, year: Int, rating: Double, genre: String)]
+) {
     movies.append((title: title, year: year, rating: rating, genre: genre))
 }
 
-func findMovie(byTitle title: String, in movies: [Movie]) -> Movie? {
+func findMovie(
+    byTitle title: String,
+    in movies: [(title: String, year: Int, rating: Double, genre: String)]
+) -> (title: String, year: Int, rating: Double, genre: String)? {
     let needle = title.lowercased()
     return movies.first { $0.title.lowercased() == needle }
 }
 
-func filterMovies(_ movies: [Movie], matching criteria: (Movie) -> Bool) -> [Movie] {
+func filterMovies(
+    _ movies: [(title: String, year: Int, rating: Double, genre: String)],
+    matching criteria: ((title: String, year: Int, rating: Double, genre: String)) -> Bool
+) -> [(title: String, year: Int, rating: Double, genre: String)] {
     movies.filter(criteria)
 }
 
-func getUniqueGenres(from movies: [Movie]) -> Set<String> {
+func getUniqueGenres(from movies: [(title: String, year: Int, rating: Double, genre: String)]) -> Set<String> {
     Set(movies.map { $0.genre })
 }
 
-func averageRating(of movies: [Movie]) -> Double {
+func averageRating(of movies: [(title: String, year: Int, rating: Double, genre: String)]) -> Double {
     guard !movies.isEmpty else { return 0.0 }
     let total = movies.map { $0.rating }.reduce(0.0, +)
     return total / Double(movies.count)
 }
 
-func bestMovie(in movies: [Movie]) -> Movie? {
+func bestMovie(
+    in movies: [(title: String, year: Int, rating: Double, genre: String)]
+) -> (title: String, year: Int, rating: Double, genre: String)? {
     movies.max { $0.rating < $1.rating }
 }
 
-func moviesByDecade(_ movies: [Movie]) -> [String: [Movie]] {
-    var grouped: [String: [Movie]] = [:]
+func moviesByDecade(
+    _ movies: [(title: String, year: Int, rating: Double, genre: String)]
+) -> [String: [(title: String, year: Int, rating: Double, genre: String)]] {
+    var grouped: [String: [(title: String, year: Int, rating: Double, genre: String)]] = [:]
     for movie in movies {
         let decade = "\(movie.year / 10 * 10)s"
         grouped[decade, default: []].append(movie)
@@ -72,7 +86,7 @@ func displayMenu() {
     print("6. Quitter")
 }
 
-func runApp(movies: inout [Movie]) {
+func runApp(movies: inout [(title: String, year: Int, rating: Double, genre: String)]) {
     var shouldRun = true
 
     while shouldRun {
@@ -122,14 +136,6 @@ func runApp(movies: inout [Movie]) {
                 displayMovie(top)
             } else {
                 print("Meilleur film: N/A")
-            }
-            let byDecade = moviesByDecade(movies)
-            if !byDecade.isEmpty {
-                print("Films par decennie:")
-                for decade in byDecade.keys.sorted() {
-                    let titles = byDecade[decade, default: []].map { $0.title }.joined(separator: ", ")
-                    print("- \(decade): \(titles)")
-                }
             }
 
         case "5":
