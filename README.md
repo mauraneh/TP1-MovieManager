@@ -1,6 +1,6 @@
-# TP1 - Movie Manager (Swift)
+# TP1 - Movie Manager (Swift) de Maurane Hugon
 
-Petit projet de TP en Swift (SPM) pour manipuler des collections, fonctions, closures et opérations fonctionnelles.
+Petit projet de TP en Swift pour manipuler des collections, fonctions, closures et opérations fonctionnelles.
 
 ## Lancer le projet
 ```bash
